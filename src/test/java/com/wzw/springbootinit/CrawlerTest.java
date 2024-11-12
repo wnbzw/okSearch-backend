@@ -53,7 +53,7 @@ class CrawlerTest {
     @Test
     public void test() {
         //1. 获取所有帖子
-        String json="{\"pageSize\":12,\"sortOrder\":\"descend\",\"sortField\":\"createTime\",\"tags\":[],\"current\":1,\"reviewStatus\":1,\"category\":\"文章\",\"hiddenContent\":true}";
+        String json="{\"pageSize\":12,\"sortOrder\":\"descend\",\"sortField\":\"createTime\",\"tags\":[],\"current\":2,\"reviewStatus\":1,\"category\":\"文章\",\"hiddenContent\":true}";
         String url="https://api.codefather.cn/api/post/list/page/vo";
         String result = HttpRequest.post(url).body(json).execute().body();
         // 2. 解析数据

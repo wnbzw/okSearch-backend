@@ -1,11 +1,15 @@
 package com.wzw.springbootinit.service;
 
+import co.elastic.clients.elasticsearch.sql.QueryRequest;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wzw.springbootinit.model.dto.post.PostQueryRequest;
+import com.wzw.springbootinit.model.dto.user.UserQueryRequest;
 import com.wzw.springbootinit.model.entity.Post;
 import com.wzw.springbootinit.model.vo.PostVO;
+import com.wzw.springbootinit.model.vo.UserVO;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -57,4 +61,9 @@ public interface PostService extends IService<Post> {
      * @return
      */
     Page<PostVO> getPostVOPage(Page<Post> postPage, HttpServletRequest request);
+
+    /*
+     * 分页获取用户封装列表
+     */
+//    Page<PostVO> listPostVOByPage(PostQueryRequest postQueryRequest);
 }

@@ -4,6 +4,7 @@ import static com.wzw.springbootinit.constant.UserConstant.USER_LOGIN_STATE;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wzw.springbootinit.common.ErrorCode;
 import com.wzw.springbootinit.constant.CommonConstant;
@@ -268,5 +269,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         queryWrapper.orderBy(SqlUtils.validSortField(sortField), sortOrder.equals(CommonConstant.SORT_ORDER_ASC),
                 sortField);
         return queryWrapper;
+    }
+
+    @Override
+    public Page<UserVO> listUserVOByPage(UserQueryRequest userQueryRequest) {
+        QueryWrapper<User> queryWrapper = this.getQueryWrapper(userQueryRequest);
+        Page<User> userPage = this.page(new Page<>(userQueryRequest.getCurrent(), userQueryRequest.getPageSize()),
+                queryWrapper);
+        long pageSize = userQueryRequest.getPageSize();
+        long current = userQueryRequest.getCurrent();
+        Page<UserVO> userVoPage = new Page<>(current, pageSize, userPage.getTotal());
+        userVoPage.setRecords(this.getUserVO(userPage.getRecords()));
+        return userVoPage;
     }
 }
